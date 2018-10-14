@@ -16,7 +16,6 @@ Nuevo archivos en el paquete "utn.frsf.ofa.cursojava.tp.integrador":
         
   - > Servicio
         * PedidoService.java
-        
    - > Util
         * RecetaConverter.java       
         * RecetasFiltler.java
