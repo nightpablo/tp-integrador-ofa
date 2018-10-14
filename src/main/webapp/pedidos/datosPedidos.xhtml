@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="frmDatosPedidos">
+         <h2>Nuevo Pedido</h2>
+         <h:panelGrid columns="2" cellpadding="5">
+         <p:outputLabel for="fechaPedido" value="Fecha de pedido: " />
+ 		<p:calendar id="fechaPedido" value="#{pedidoController.pedidoSeleccionado.fechaPedido}" pattern="dd/MM/yyyy"/>
+ 		
+         <p:outputLabel for="direccionEnvio" value="Direccion de envio: " />
+ 		<p:inputText id="direccionEnvio" value="#{pedidoController.pedidoSeleccionado.direccionEnvio}"/>
+ 		
+ 		<p:outputLabel for="filtro" value="" />
+ 		<p:panel header="Filtro" toggleable="true" collapsed="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+ 		<h:panelGrid id="filtro" columns="2" border = "1" cellpadding = "10" cellspacing = "1">
+   	<p:outputLabel for="precioMinimo" value="Precio Minimo: " />
+   	<p:inputText id="precioMinimo" value="#{pedidoController.recetafiltrado.precioMinimoAFiltrar}"/>
+   	
+   	<p:outputLabel for="precioMaximo" value="Precio Maximo: " />
+   	<p:inputText id="precioMaximo" value="#{pedidoController.recetafiltrado.precioMaximoAFiltrar}"/>
+   	
+   	<p:outputLabel for="fechaInicial" value="Fecha Inicial: " />
+   	<p:calendar id="fechaInicial" value="#{pedidoController.recetafiltrado.fechaInicialAFiltrar}" pattern="dd/MM/yyyy"/>
+   	
+   	<p:outputLabel for="fechaFinal" value="Fecha Final: " />
+   	<p:calendar id="fechaFinal" value="#{pedidoController.recetafiltrado.fechaFinalAFiltrar}" pattern="dd/MM/yyyy"/>
+   	
+   	<p:outputLabel for="nombreAutor" value="Autor: " />
+       <p:selectOneMenu id="nombreAutor" value="#{pedidoController.recetafiltrado.autorAFiltrar}" panelStyle="width:220px"
+                             effect="fade" style="width:200px" converter="autorConverter">
+        	<f:selectItems value="#{autorController.listaAutores}" var="unAutor" itemLabel="#{unAutor.nombre}" itemValue="#{unAutor}" />
+        </p:selectOneMenu>   
+        
+        <p:outputLabel for="ingrediente" value="Ingredientes:" />
+       <p:selectManyMenu id="ingrediente" value="#{pedidoController.recetafiltrado.listaIngredientesAFiltrar}" converter="ingredienteConverter"
+                         var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+           <f:selectItems value="#{ingredienteController.listaIngredientes}" var="unIngrediente" itemLabel="#{unIngrediente.descripcion}" itemValue="#{unIngrediente}" />
+
+           <p:column>
+               <h:outputText styleClass="ui-theme ui-theme-#{t.descripcion}" />
+           </p:column>
+
+           <p:column>
+               <h:outputText value="#{t.descripcion}" />
+           </p:column>
+       </p:selectManyMenu>
+        
+       <p:commandButton value="Clear" type="reset" />
+   	<p:commandButton id="submitButton" value="Sumbit" action="#{pedidoController.filtrarBusquedaAvanzada}" update=":frmDatosPedidos:recetas"/>
+	
+       
+   </h:panelGrid>
+ 		</p:panel>
+ 		<p:outputLabel for="recetas" value="Recetas: " />
+ 		<p:pickList id="recetas" value="#{pedidoController.recetasDisponibles}" converter="recetaConverter"  var="unaReceta" itemLabel="#{unaReceta.titulo}" itemValue="#{unaReceta}" />
+        <p:commandButton id="Submit" value="Guardar" action="#{pedidoController.guardar}" ajax="false" update="frmDatosPedidos" ></p:commandButton>
+         </h:panelGrid>  
+		
+ 
+    </h:form>
+</ui:composition>

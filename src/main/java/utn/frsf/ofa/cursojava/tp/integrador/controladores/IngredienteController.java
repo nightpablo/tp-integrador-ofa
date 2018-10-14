@@ -6,6 +6,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import utn.frsf.ofa.cursojava.tp.integrador.modelo.Autor;
 import utn.frsf.ofa.cursojava.tp.integrador.modelo.Ingrediente;
 import utn.frsf.ofa.cursojava.tp.integrador.servicio.IngredienteService;
 
@@ -56,6 +58,9 @@ public class IngredienteController implements Serializable{
         // TODO codificar el metodo guardar
         // guardar el nuevo ingrediente
         // setear en null el ingrediente seleccionado
+    	Ingrediente tmp = this.servicioIngrediente.guardar(ingredienteSeleccionado);
+        this.listaIngredientes.add(tmp);
+        this.ingredienteSeleccionado = null;
         return "listaIngrediente";
     }
 

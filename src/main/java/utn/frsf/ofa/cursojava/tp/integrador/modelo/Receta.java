@@ -8,7 +8,10 @@ package utn.frsf.ofa.cursojava.tp.integrador.modelo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,12 +38,19 @@ public class Receta implements Serializable{
 
     
     // TODO Completar mapeo de fecha
+    @Temporal(TemporalType.DATE)
     private Date fechaCreacion;
 
     // TODO Completar mapeo de relacion
+    @ManyToMany
+    @JoinTable(name = "IngredientesRecetas", 
+    joinColumns = @JoinColumn(name = "id_receta_fk"), 
+    inverseJoinColumns = @JoinColumn(name = "id_ingrediente_fk"))
     private List<Ingrediente> ingredientes;
     
     // TODO Completar mapeo de relacion
+    @ManyToOne
+    @JoinColumn(name="ID_AUTOR") 
     private Autor autor;
     
     public Integer getId() {
@@ -107,6 +117,13 @@ public class Receta implements Serializable{
         this.autor = autor;
     }
     
-
+    @Override
+    public boolean equals(Object obj) {
+    	return getId() == ((Receta)obj).getId();
+    }
     
+    @Override
+    public String toString() {
+    	return id+";"+titulo+";"+descripcion+";"+precio+";"+duracionEstimada+";"+fechaCreacion;
+    }
 }

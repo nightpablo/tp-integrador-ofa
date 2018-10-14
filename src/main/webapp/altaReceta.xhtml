@@ -62,7 +62,11 @@
                     <p:outputLabel for="ingredientes" value="Ingredientes:" />
                 </div>
                 <div class="p-col-12" >
-                    <p:pickList id="ingredientes" value="#{recetaController.ingredientesDisponibles}" disabled="#{empty recetaController.recetaSeleccionada}" converter="ingredienteConverter"  var="unIngrediente" itemLabel="#{unIngrediente.descripcion}" itemValue="#{unIngrediente}" />
+                    <p:pickList id="ingredientes" value="#{recetaController.ingredientesDisponibles}" disabled="#{empty recetaController.recetaSeleccionada}" converter="ingredienteConverter"  var="unIngrediente" itemLabel="#{unIngrediente.descripcion}" itemValue="#{unIngrediente}">
+                   	<p:column style="width:90%;">
+                        <h:outputText value="#{unIngrediente.descripcion}" />
+                    </p:column>
+                    </p:pickList>
                 </div>
 
                 <div class="p-col-12" >

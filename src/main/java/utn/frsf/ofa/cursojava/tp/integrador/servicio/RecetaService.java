@@ -44,14 +44,15 @@ public class RecetaService {
         return em.createQuery("SELECT r FROM Receta r").getResultList();
     }
     
+    public boolean eliminar(Receta r) {
+    	em.remove(r);
+    	return true;
+    }
+    
     public List<Ingrediente> ingredientesPorIdReceta(Integer id){
         return em.createQuery("SELECT i FROM Receta r JOIN r.ingredientes i WHERE r.id = :P_ID_RECETA")
                 .setParameter("P_ID_RECETA", id)
                 .getResultList();
-    }
-    
-    public List<Receta> busquedaAvanzada(AutorService a, Ingrediente i, Double precioMin, Double precioMax,Date fMin,Date fMax){        
-        return null;
     }
 
 }

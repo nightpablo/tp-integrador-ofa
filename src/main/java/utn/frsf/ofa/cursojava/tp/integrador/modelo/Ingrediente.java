@@ -7,7 +7,10 @@ package utn.frsf.ofa.cursojava.tp.integrador.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +29,7 @@ public class Ingrediente implements Serializable{
     private Double costo;
 
     // TODO Completar mapeo de relacion
+    @ManyToMany (fetch = FetchType.EAGER, mappedBy = "ingredientes", cascade = CascadeType.ALL)
     private List<Receta> usadoEnRecetas;
     
     public Integer getId() {
@@ -65,6 +69,9 @@ public class Ingrediente implements Serializable{
         return id+";"+descripcion+";"+costo;
     }
 
-    
+    @Override
+    public boolean equals(Object obj) {
+    	return this.getId() == ((Ingrediente) obj).getId();
+    }
     
 }

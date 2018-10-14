@@ -2,23 +2,48 @@
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <h:form id="frmDatosAutores">
-        <div class="p-grid">
-            <div class="p-col-12" >
-                <h2>Informacion de Autor</h2>
-            </div>
-            <div class="p-col-2" >
-                <p:outputLabel for="nombreAutor" value="Nombre Autor:" />
-                <p:inputText id="nombreAutor" required="true" value="#{autorController.autorSeleccionado.nombre}" disabled="#{empty autorController.autorSeleccionado}"/>
-            </div>
-            <div class="p-col-2" >
-                <p:commandButton value="Guardar" action="#{autorController.guardar}" update="frmDatosAutores frmListaAutores" disabled="#{empty autorController.autorSeleccionado}"></p:commandButton>
-            </div>
-            <div class="p-col-3" >
-                <p:commandButton value="Nuevo" action="#{autorController.nuevo()}" update="frmDatosAutores" disabled="#{not empty autorController.autorSeleccionado}"></p:commandButton>
-            </div>                
-        </div>
+    <h:form id="frmDatosReceta2">
+    <h2>Informacion de Receta</h2>
+    <h:panelGrid columns="2" cellpadding="5">
+    	<p:outputLabel for="precioMinimo" value="Precio Minimo: " />
+    	<p:inputText id="precioMinimo" value="#{recetaController.recetafiltrado.precioMinimoAFiltrar}"/>
+    	
+    	<p:outputLabel for="precioMaximo" value="Precio Maximo: " />
+    	<p:inputText id="precioMaximo" value="#{recetaController.recetafiltrado.precioMaximoAFiltrar}"/>
+    	
+    	<p:outputLabel for="fechaInicial" value="Fecha Inicial: " />
+    	<p:calendar id="fechaInicial" value="#{recetaController.recetafiltrado.fechaInicialAFiltrar}" pattern="dd/MM/yyyy"/>
+    	
+    	<p:outputLabel for="fechaFinal" value="Fecha Final: " />
+    	<p:calendar id="fechaFinal" value="#{recetaController.recetafiltrado.fechaFinalAFiltrar}" pattern="dd/MM/yyyy"/>
+    	
+    	<p:outputLabel for="nombreAutor" value="Autor: " />
+        <p:selectOneMenu id="nombreAutor" value="#{recetaController.recetafiltrado.autorAFiltrar}" panelStyle="width:220px"
+                              effect="fade" style="width:200px" converter="autorConverter">
+         	<f:selectItems value="#{autorController.listaAutores}" var="unAutor" itemLabel="#{unAutor.nombre}" itemValue="#{unAutor}" />
+         </p:selectOneMenu>   
+         
+         <p:outputLabel for="ingrediente" value="Ingredientes:" />
+        <p:selectManyMenu id="ingrediente" value="#{recetaController.recetafiltrado.listaIngredientesAFiltrar}" converter="ingredienteConverter"
+                          var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+            <f:selectItems value="#{ingredienteController.listaIngredientes}" var="unIngrediente" itemLabel="#{unIngrediente.descripcion}" itemValue="#{unIngrediente}" />
+ 
+            <p:column>
+                <h:outputText styleClass="ui-theme ui-theme-#{t.descripcion}" />
+            </p:column>
+ 
+            <p:column>
+                <h:outputText value="#{t.descripcion}" />
+            </p:column>
+        </p:selectManyMenu>
+         
+        <p:commandButton value="Clear" type="reset" />
+	   	<p:commandButton id="submitButton" value="Sumbit" action="#{recetaController.filtrarBusquedaAvanzada()}" update=":frmListaRecetas2:tblListaRecetas2"/>
+		
+        
+    </h:panelGrid>
     </h:form>
 </ui:composition>

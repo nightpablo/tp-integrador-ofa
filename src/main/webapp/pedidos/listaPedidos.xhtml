@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:form id="frmListaPedidos">
+        <p:dataTable id="tblListaPedidos" var="unPedido" value="#{pedidoController.listaPedidos}" rendered="true">
+            <f:facet name="header">
+                Lista de recetas
+            </f:facet>
+            <p:column headerText="Id" style="width:30px">
+                <h:outputText value="#{unPedido.idPedido}" />
+            </p:column>
+            <p:column headerText="Direccion Envio">
+                <h:outputText value="#{unPedido.direccionEnvio}" />
+            </p:column>
+            <p:column headerText="Fecha pedido">
+                <h:outputText value="#{unPedido.fechaPedido}" />
+            </p:column>
+            
+        	<p:column style="width:50px;text-align: center">
+            <p:commandButton update=":frmListaPedidos:pedidoDetalle" oncomplete="PF('pedidoDialog').show()" icon="ui-icon-search" title="View">
+                <f:setPropertyActionListener value="#{unPedido}" target="#{pedidoController.pedidoSeleccionado}" />
+            </p:commandButton>
+        </p:column>
+        </p:dataTable>
+    	<p:dialog header="Información del Pedido" widgetVar="pedidoDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+	        <p:outputPanel id="pedidoDetalle" style="text-align:center;">
+	            <p:panelGrid  columns="1" rendered="#{not empty pedidoController.pedidoSeleccionado}" columnClasses="label,value">
+	 				<h:outputText value="Recetas:" />
+	 				<p:repeat value="#{pedidoController.pedidoSeleccionado.recetasPedidas}" var="unaReceta">
+	 					<h:panelGrid columns="2" cellpadding="5">
+		 					<h:outputText value="Id:" />
+			                <h:outputText value="#{unaReceta.id}" />
+			                <h:outputText value="Titulo:" />
+			                <h:outputText value="#{unaReceta.titulo}" />
+			                <h:outputText value="Descripción:" />
+			                <h:outputText value="#{unaReceta.descripcion}" />
+		                </h:panelGrid>
+		                <hr />
+	 				</p:repeat>
+	            </p:panelGrid>
+	        </p:outputPanel>
+	    </p:dialog>
+    </h:form>
+
+</ui:composition>
