@@ -28,14 +28,18 @@ Nuevo archivos en el paquete "utn.frsf.ofa.cursojava.tp.integrador":
         * RecetasFiltler.java
 
 Nuevo archivos en el directorio "webapp":
-  - > Pedidos
+
+[Pedidos]
+
         * datosPedidos.xhtml
         * listaPedidos.xhtml
         
-  - > Recetas (Eran los mismos archivos de Autores - tuve que recrear)
+[Recetas (Eran los mismos archivos de Autores - tuve que recrear)]
+
         * formBusqueda.xhtml
         * listaResultados.xhtml
         
-  - > [sueltos]
+[sueltos]
+        
         * gestionPedidos.xhtml
         
