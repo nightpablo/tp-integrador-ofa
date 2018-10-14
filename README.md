@@ -4,16 +4,14 @@ Autor: Barragán, Pablo
 Entorno IDE: Eclipse Prothon
 
 Nuevo archivos en el paquete "utn.frsf.ofa.cursojava.tp.integrador":
-  - > Controladores
+  [Controladores]
         * PedidoController.java
         
   - > Logica
         * BusquedaAvanzadaReceta.java
         * BusquedaAvanzadaRecetaMock.java
-        
   - > Modelo
         * Pedido.java
-        
   - > Servicio
         * PedidoService.java
    - > Util
