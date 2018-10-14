@@ -9,14 +9,21 @@ Nuevo archivos en el paquete "utn.frsf.ofa.cursojava.tp.integrador":
         
         * PedidoController.java
         
-  - > Logica
+[Logica]
+        
         * BusquedaAvanzadaReceta.java
         * BusquedaAvanzadaRecetaMock.java
-  - > Modelo
+  
+[Modelo]
+        
         * Pedido.java
-  - > Servicio
+  
+[Servicio]
+        
         * PedidoService.java
-   - > Util
+
+[Util]
+        
         * RecetaConverter.java       
         * RecetasFiltler.java
 
